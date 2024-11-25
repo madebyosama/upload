@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { storage } from './libs/firebase'; // Ensure this is the correct import for your Firebase config
-
-// Importing necessary Firebase functions
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const Home: React.FC = () => {
@@ -21,7 +19,7 @@ const Home: React.FC = () => {
   };
 
   const uploadFile = async () => {
-    if (!file) return;
+    if (!file || !storage) return; // Ensure storage is available
 
     setUploading(true);
 
