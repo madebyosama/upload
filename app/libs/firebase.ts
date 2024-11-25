@@ -1,3 +1,5 @@
+'use client'; // Ensures the component runs only on the client
+
 // lib/firebase.ts
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
