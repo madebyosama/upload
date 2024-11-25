@@ -1,6 +1,4 @@
-// app/libs/firebase.ts
-
-import { initializeApp, getApp, getApps } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 
 // Firebase configuration
@@ -14,17 +12,10 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Only initialize Firebase in the browser (client-side)
-let app;
-if (typeof window !== 'undefined') {
-  // Check if Firebase has already been initialized
-  if (!getApps().length) {
-    app = initializeApp(firebaseConfig); // Initialize Firebase if not already initialized
-  } else {
-    app = getApp(); // Use the existing app instance if already initialized
-  }
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-const storage = app ? getStorage(app) : null;
+// Initialize Firebase Storage
+const storage = getStorage(app);
 
 export { storage };
