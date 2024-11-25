@@ -1,8 +1,7 @@
-// components/FileUpload.tsx
 'use client';
 
 import { useState } from 'react';
-import { storage } from '../libs/firebase'; // This import is correct
+import { storage } from '../libs/firebase'; // Assuming storage is initialized here
 
 // Importing necessary Firebase functions
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -22,6 +21,13 @@ const FileUpload: React.FC = () => {
     if (!file) return;
 
     setUploading(true);
+
+    // Check if the storage object is properly initialized
+    if (!storage) {
+      console.error('Firebase storage is not initialized.');
+      setUploading(false);
+      return;
+    }
 
     // Create a reference to the storage location
     const storageRef = ref(storage, `Uploads/${file.name}`);
